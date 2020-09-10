@@ -9,14 +9,18 @@ import {
   Vue,
   Watch,
 } from "vue-property-decorator";
+import { AutowiredService } from "../../../lib/sg-resource/decorators";
 import Common from "../../core/common";
 import { PATTERN_REG } from "../../core/constants";
 import { LoginInfo } from "../../core/domain/loginInfo";
+import { SystemService } from "../../core/services/system.serv";
 
 @Component({
   components: {},
 })
 export default class RegisterComp extends Vue {
+  @AutowiredService
+  systemService: SystemService;
   showLogin: boolean = false;
   tabPosition: string = "per"; // per个人  org社团
   perRegForm: LoginInfo = new LoginInfo();
@@ -122,6 +126,7 @@ export default class RegisterComp extends Vue {
   async sendMsg(e: any) {
     try {
       this.countDown = true;
+      const res = await this.systemService.commitRegiste(this.perRegForm);
       this.timer = Common.resend(e.target, { num: 5 }, () => {
         this.countDown = false;
       });
