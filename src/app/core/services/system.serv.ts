@@ -6,7 +6,14 @@ export interface ISystemService {
   loginDo(params: any): Promise<any>;
   backLearningName(params: any): Promise<any>;
   changeOrgMobile(params: any): Promise<any>;
-  commitRegiste(params: any): Promise<any>;
+  commitPersonalRegister(params: any): Promise<any>;
+  commitRegisterOrg(params: any): Promise<any>;
+  getVerificationCode(params: any): Promise<any>;
+  getPicVerificationCode(params: any): Promise<any>;
+  resetPersonalPassword(params: any): Promise<any>;
+  resetOrgPassword(params: any): Promise<any>;
+  changePersonalMobile(params: any): Promise<any>;
+  retrievegLearningName(params: any): Promise<any>;
 }
 
 type ISystemServiceConstructor = new () => ISystemService;
@@ -26,81 +33,123 @@ export class SystemService extends BaseService implements ISystemService {
     return this.proxyHttp.post("login", { userName, password });
   }
   public loginDo(params: any): Promise<any> {
-    const {
+    const { autoLogin, password, phoneNumber, verifyCode } = params;
+    return this.proxyHttp.post("loginDo", {
       autoLogin,
-      learningName,
-      newLinkerName,
-      newPhoneNumbe,
-      newVerifyCode,
+      password,
+      phoneNumber,
+      verifyCode,
+    });
+  }
+  public commitPersonalRegister(params: any): Promise<any> {
+    const {
       password,
       passwordCommit,
-      personalOrOrg,
       phoneNumber,
-      registType,
-      sendBizNo,
-      sendType,
-      type,
       verifyCode,
       verifyType,
     } = params;
-    return this.proxyHttp.post("loginDo", {
-      autoLogin,
-      learningName,
-      newLinkerName,
-      newPhoneNumbe,
-      newVerifyCode,
+    return this.proxyHttp.post("commitPersonalRegister", {
       password,
       passwordCommit,
-      personalOrOrg,
       phoneNumber,
-      registType,
-      sendBizNo,
-      sendType,
-      type,
       verifyCode,
       verifyType,
     });
   }
-  public commitRegiste(params: any): Promise<any> {
+  public commitRegisterOrg(params: any): Promise<any> {
     const {
-      autoLogin,
       learningName,
-      newLinkerName,
-      newPhoneNumbe,
-      newVerifyCode,
       password,
       passwordCommit,
-      personalOrOrg,
       phoneNumber,
-      registType,
-      sendBizNo,
-      sendType,
       type,
       verifyCode,
       verifyType,
     } = params;
-    return this.proxyHttp.post("commitRegiste", {
-      autoLogin,
+    return this.proxyHttp.post("commitRegisterOrg", {
       learningName,
-      newLinkerName,
-      newPhoneNumbe,
-      newVerifyCode,
       password,
       passwordCommit,
-      personalOrOrg,
       phoneNumber,
-      registType,
-      sendBizNo,
-      sendType,
       type,
       verifyCode,
       verifyType,
     });
   }
   public backLearningName(params: any): Promise<any> {
-    return this.proxyHttp.post("backLearningName", params);
+    const { phoneNumber, verifyCode } = params;
+    return this.proxyHttp.post("backLearningName", {
+      phoneNumber,
+      verifyCode,
+    });
   }
+
   public changeOrgMobile(params: any): Promise<any> {
-    return this.proxyHttp.post("changeOrgMobile", params);
+    const {
+      phoneNumber,
+      verifyCode,
+      newVerifyCode,
+      newPhoneNumber,
+      newLinkerName,
+    } = params;
+    return this.proxyHttp.post("changeOrgMobile", {
+      newLinkerName,
+      newPhoneNumber,
+      newVerifyCode,
+      phoneNumber,
+      verifyCode,
+    });
+  }
+
+  public getVerificationCode(params: any): Promise<any> {
+    const { phoneNumber, sendType } = params;
+    return this.proxyHttp.post("getVerificationCode", {
+      phoneNumber,
+      sendType,
+    });
+  }
+  public getPicVerificationCode(params: any): Promise<any> {
+    const { phoneNumber } = params;
+    return this.proxyHttp.post("getPicVerificationCode", {
+      phoneNumber,
+    });
+  }
+
+  public resetPersonalPassword(params: any): Promise<any> {
+    const { phoneNumber, verifyCode, password, passwordCommit } = params;
+    return this.proxyHttp.post("resetPersonalPassword", {
+      password,
+      passwordCommit,
+      phoneNumber,
+      verifyCode,
+    });
+  }
+
+  public resetOrgPassword(params: any): Promise<any> {
+    const {
+      phoneNumber,
+      verifyCode,
+      password,
+      passwordCommit,
+      learningName,
+    } = params;
+    return this.proxyHttp.post("resetOrgPassword", {
+      learningName,
+      password,
+      passwordCommit,
+      phoneNumber,
+      verifyCode,
+    });
+  }
+
+  public changePersonalMobile(params: any): Promise<any> {
+    const { phoneNumber, verifyCode, newVerifyCode, newPhoneNumber } = params;
+    return this.proxyHttp.post("changePersonalMobile", {
+      newPhoneNumber,
+      newVerifyCode,
+      phoneNumber,
+      verifyCode,
+    });
   }
 }

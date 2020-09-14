@@ -10,21 +10,25 @@ import {
   Watch,
 } from "vue-property-decorator";
 import { AutowiredService } from "../../../lib/sg-resource/decorators";
+import { ComBaseComp } from "../../core/ComBaseComp";
 import Common from "../../core/common";
 import { PATTERN_REG } from "../../core/constants";
-import { LoginInfo } from "../../core/domain/loginInfo";
+import { BaseInfo } from "../../core/domain/BaseInfo";
 import { SystemService } from "../../core/services/system.serv";
 
 @Component({
   components: {},
 })
-export default class RegisterComp extends Vue {
+export default class RegisterComp extends ComBaseComp {
   @AutowiredService
   systemService: SystemService;
-  showLogin: boolean = false;
-  tabPosition: string = "per"; // per个人  org社团
-  perRegForm: LoginInfo = new LoginInfo();
-  orgRegForm: LoginInfo = new LoginInfo();
+  showRegister: boolean = false;
+  perRegForm: BaseInfo = new BaseInfo();
+  orgRegForm: BaseInfo = new BaseInfo();
+  registType: string = "1"; // 注册类型
+  countDown: boolean = false;
+  agreement: boolean = false;
+  timer: any;
   options: any[] = [
     { label: "xxx", value: "1" },
     { label: "yyy", value: "2" },
@@ -45,12 +49,20 @@ export default class RegisterComp extends Vue {
     learningName: [
       { required: true, message: "请输入新学名", trigger: "change" },
     ],
-    verifyType: [
+    type: [
       { required: true, message: "请选择单位或社团类型", trigger: "change" },
     ],
+    agreement: [
+      {
+        message: "请先同意协议",
+        required: true,
+        trigger: "change",
+        type: "array",
+      },
+    ],
   };
-  countDown: boolean;
-  timer: any;
+
+  @Inject("reload") reload: any;
 
   get allowSendMsgPer() {
     return (
@@ -59,7 +71,7 @@ export default class RegisterComp extends Vue {
   }
   get allowSendMsgOrg() {
     return (
-      Common.isValidateMobile(this.orgRegForm.newPhoneNumber) && !this.countDown
+      Common.isValidateMobile(this.orgRegForm.phoneNumber) && !this.countDown
     );
   }
 
@@ -125,27 +137,62 @@ export default class RegisterComp extends Vue {
    */
   async sendMsg(e: any) {
     try {
-      this.countDown = true;
-      const res = await this.systemService.commitRegiste(this.perRegForm);
+      if (this.registType === "1") {
+        this.countDown = true;
+        this.perRegForm.sendType = "1";
+        const res = await this.systemService.getVerificationCode(
+          this.perRegForm,
+        );
+        this.perRegForm.verifyCode = res;
+      } else {
+        this.countDown = true;
+        this.orgRegForm.sendType = "2";
+        const res = await this.systemService.getVerificationCode(
+          this.orgRegForm,
+        );
+        this.orgRegForm.verifyCode = res;
+      }
       this.timer = Common.resend(e.target, { num: 5 }, () => {
         this.countDown = false;
       });
     } catch (error) {
-      //
+      this.messageError(error);
     }
   }
 
   /**
    * 注册
-   * @param type 注册类型
    */
-  async submitForm(type: string) {
+  async submitForm() {
     try {
-      await (this.$refs[type] as ElForm).validate();
-      console.log("success");
+      if (this.registType === "1") {
+        await (this.$refs.perRegForm as ElForm).validate();
+        const res = await this.systemService.commitPersonalRegister(
+          this.perRegForm,
+        );
+        this.$message.success("恭喜你，注册成功");
+        this.showRegister = false;
+      } else {
+        await (this.$refs.orgRegForm as ElForm).validate();
+        const res = await this.systemService.commitRegisterOrg(this.orgRegForm);
+        this.$message.success("恭喜你，注册成功");
+        this.showRegister = false;
+      }
+      this.reload(); // 刷新页面
     } catch (error) {
-      // this.$message.error("请完善信息");
+      this.messageError(error);
     }
+  }
+
+  setShowLoginRegister() {
+    this.showRegister = false;
+    (this.$refs.perRegForm as ElForm).resetFields();
+    (this.$refs.orgRegForm as ElForm).resetFields();
+  }
+
+  showPopover() {
+    this.showRegister = true;
+    this.$emit("setShowLoginRegister", "login");
   }
 
   /* 生命钩子 START */

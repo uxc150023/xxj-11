@@ -17,13 +17,9 @@ export class ComBaseComp extends Vue {
       return;
     }
     const h = this.$createElement;
-    if (
-      error.subMessage ||
-      error.errorMessage ||
-      (error.message && !error.stack)
-    ) {
+    if (error.subMessage || error.errorMessage || (error.msg && !error.stack)) {
       Message({
-        message: error.subMessage || error.errorMessage || error.message,
+        message: error.subMessage || error.errorMessage || error.msg,
         type: "error",
       });
     } else if (error.name === "Simultaneous Request") {
@@ -36,11 +32,11 @@ export class ComBaseComp extends Vue {
       //   ]),
       //   type: "warning",
       // });
-    } else if (error.message && error.stack) {
+    } else if (error.msg && error.stack) {
       Message({
         dangerouslyUseHTMLString: true,
         message: `<div>
-    <p>${error.message}</p>
+    <p>${error.msg}</p>
     <blockquote>${error.stack}</blockquote>
   </div>
   `,

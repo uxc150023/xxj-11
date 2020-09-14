@@ -1,6 +1,7 @@
 // tslint:disable-next-line:no-var-requires
 const MockAdapter = require("axios-mock-adapter");
 import Axios, { AxiosPromise, AxiosRequestConfig, AxiosResponse } from "axios";
+import NProgress from "nprogress";
 import { ICommon } from "./common";
 import { IConfigAdapter, IMockData } from "./config";
 import { SGVFactory } from "./factory";
@@ -127,10 +128,11 @@ export class ProxyHttp implements IProxyHttp {
     // console.log("initInterceptors");
     Axios.interceptors.request.eject(this.reqInterceptor);
     this.reqInterceptor = Axios.interceptors.request.use(
-      config => {
+      (config) => {
         // console.log("request", JSON.stringify(config));
+        NProgress.start();
         this.removePending(config);
-        config.cancelToken = new Axios.CancelToken(c => {
+        config.cancelToken = new Axios.CancelToken((c) => {
           this.pending.push({
             cancel: c,
             path: [
@@ -151,19 +153,20 @@ export class ProxyHttp implements IProxyHttp {
         config.headers.version = config.headers.version || "1.0.0";
         return config;
       },
-      error => {
+      (error) => {
         // Do something with request error
         return Promise.reject(error);
       },
     );
     Axios.interceptors.response.eject(this.resInterceptor);
     this.resInterceptor = Axios.interceptors.response.use(
-      response => {
+      (response) => {
         // console.log("response", JSON.stringify(response.config));
         this.removePending(response.config);
+        NProgress.done();
         return response;
       },
-      error => {
+      (error) => {
         // console.log(error);
         if (error.response && error.response.data) {
           return Promise.reject(error.response.data);
@@ -182,8 +185,9 @@ export class ProxyHttp implements IProxyHttp {
   private fulfilled = <T>(res: AxiosResponse) => {
     const promise = new Promise<T>((resolve, reject) => {
       if (
-        res.data.hasOwnProperty("status") &&
-        res.data.status + "" === this.configAdapter.successCode
+        // res.data.hasOwnProperty("status") &&
+        // res.data.status + "" === this.configAdapter.successCode
+        res.data.success
       ) {
         resolve(res.data.data);
       } else {

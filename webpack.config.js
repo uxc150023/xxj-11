@@ -134,6 +134,12 @@ const webpackConfig = {
     port: 8080,
     publicPath,
     contentBase: path.resolve(__dirname, "dist"),
+    proxy: {
+      "/xxj": {
+        target: "http://g341d04200.wicp.vip/",
+        changeOrigin: true,
+      },
+    },
   },
   optimization: {
     splitChunks: {
