@@ -11,7 +11,7 @@ interface IHomePage {}
 })
 export default class HomePage extends mixins(BasePage) implements IHomePage {
   title: string = "首页";
-  activeName: string = "first";
+  activeName: string = "1";
   fetchData() {
     //
   }

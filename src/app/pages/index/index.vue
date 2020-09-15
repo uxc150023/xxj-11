@@ -41,9 +41,7 @@
     text-align: center;
     line-height: 200px;
     height: calc(100vh);
-
     position: fixed;
-    top: 46px;
   }
 
   .el-main {
@@ -52,7 +50,10 @@
     min-height: calc(100vh - 60px);
     overflow: hidden;
     overflow-y: auto;
-    padding: 46px 0 0 300px;
+    padding: 46px 6px 6px 6px;
+    width: calc(100% - 300px);
+    margin-left: 300px;
+    background-color: #fff;
   }
 
   body > .el-container {

@@ -3,9 +3,9 @@
     <div class="comp-module-page">
       <div class="comp-left">
         <img src="../../styles/images/logo.png" alt="cchrpp logo" />
-        <p>xxx</p>
-        <p>yyy</p>
-        <p>zzz</p>
+        <p>建站</p>
+        <p>理事</p>
+        <p>学群</p>
       </div>
       <div class="account-box">
         <div class="btn">
@@ -67,10 +67,11 @@ $color: #333;
   background: linear-gradient(90deg, #59ade7 0%, #5145ec 100%);
   position: fixed;
   top: 0;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   z-index: 9;
+  width: calc(100% - 300px);
+  right: 0;
   .comp-left {
     display: flex;
     align-items: center;

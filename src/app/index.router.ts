@@ -7,7 +7,6 @@ Vue.use(VueRouter);
 // tslint:disable:object-literal-sort-keys
 const routes: RouteConfig[] = [
   // SGV-BUILD-PAGE-ROUTER-CONFIG # NOT DELETE
-
   {
     path: "/rightview",
     name: "rightview",
@@ -81,6 +80,38 @@ const routes: RouteConfig[] = [
         path: "/alliance",
         name: "alliance",
         component: PageFactory.alliancePagePreloading,
+        meta: {
+          jurisdiction: true,
+        },
+      },
+      {
+        path: "/presentbook",
+        name: "presentbook",
+        component: PageFactory.presentbookPagePreloading,
+        meta: {
+          jurisdiction: true,
+        },
+      },
+      {
+        path: "/contribute",
+        name: "contribute",
+        component: PageFactory.contributePagePreloading,
+        meta: {
+          jurisdiction: true,
+        },
+      },
+      {
+        path: "/competition",
+        name: "competition",
+        component: PageFactory.competitionPagePreloading,
+        meta: {
+          jurisdiction: true,
+        },
+      },
+      {
+        path: "/masterwork",
+        name: "masterwork",
+        component: PageFactory.masterworkPagePreloading,
         meta: {
           jurisdiction: true,
         },

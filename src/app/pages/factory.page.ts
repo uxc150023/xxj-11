@@ -1,4 +1,32 @@
 // SGV-BUILD-PAGE-FAC # NOT DELETE
+// 'Presentbook' PAGE FACTORY START
+export function presentbookPagePreloading(): Promise<any> {
+  return import("./presentbook/presentbook.vue").catch(error => {
+    return dealOccurred(error, "Presentbook");
+  });
+}
+// 'Presentbook' PAGE FACTORY END
+// 'Contribute' PAGE FACTORY START
+export function contributePagePreloading(): Promise<any> {
+  return import("./contribute/contribute.vue").catch(error => {
+    return dealOccurred(error, "Contribute");
+  });
+}
+// 'Contribute' PAGE FACTORY END
+// 'Competition' PAGE FACTORY START
+export function competitionPagePreloading(): Promise<any> {
+  return import("./competition/competition.vue").catch(error => {
+    return dealOccurred(error, "Competition");
+  });
+}
+// 'Competition' PAGE FACTORY END
+// 'Masterwork' PAGE FACTORY START
+export function masterworkPagePreloading(): Promise<any> {
+  return import("./masterwork/masterwork.vue").catch(error => {
+    return dealOccurred(error, "Masterwork");
+  });
+}
+// 'Masterwork' PAGE FACTORY END
 // 'Personage' PAGE FACTORY START
 export function personagePagePreloading(): Promise<any> {
   return import("./personage/personage.vue").catch((error) => {
