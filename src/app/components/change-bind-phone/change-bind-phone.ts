@@ -75,7 +75,7 @@ export default class ChangeBindPhoneComp extends ComBaseComp {
     try {
       if (type === "old") {
         this.countDownOld = true;
-        this.changeForm.sendType = 1;
+        this.changeForm.sendType = 6;
         const res = await this.systemService.getVerificationCode(
           this.changeForm,
         );
@@ -85,7 +85,7 @@ export default class ChangeBindPhoneComp extends ComBaseComp {
         });
       } else {
         this.countDownNew = true;
-        this.changeForm.sendType = 1;
+        this.changeForm.sendType = 7;
         const res = await this.systemService.getVerificationCode(
           this.changeForm,
         );
@@ -99,15 +99,24 @@ export default class ChangeBindPhoneComp extends ComBaseComp {
     }
   }
 
+  /**
+   * 提交更改
+   */
   async commit(type: string) {
     try {
       await (this.$refs[type] as ElForm).validate();
+      const res = await this.systemService.changePersonalMobile(
+        this.changeForm,
+      );
+      this.dialogVisible = false;
+      this.$message.success("更改成功");
     } catch (error) {
       this.messageError(error);
     }
   }
 
   handleClose() {
+    (this.$refs.changeForm as ElForm).resetFields();
     this.$emit("showDialog", "changeBindPhoneDialog", false);
   }
 

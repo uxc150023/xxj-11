@@ -24,8 +24,9 @@ export default class FindResetPasswordComp extends ComBaseComp {
   systemService: SystemService;
   perForm: BaseInfo = new BaseInfo();
   orgForm: BaseInfo = new BaseInfo();
-  type: string = "1";
-  countDown: boolean = false;
+  resetType: string = "1";
+  countDownPer: boolean = false;
+  countDownOrg: boolean = false;
   timer: any;
 
   rules: any = {
@@ -62,12 +63,14 @@ export default class FindResetPasswordComp extends ComBaseComp {
   dialogVisible: boolean;
 
   get allowSendMsgPer() {
-    return Common.isValidateMobile(this.perForm.phoneNumber) && !this.countDown;
+    return (
+      Common.isValidateMobile(this.perForm.phoneNumber) && !this.countDownPer
+    );
   }
 
   get allowSendMsgOrg() {
     return (
-      Common.isValidateMobile(this.orgForm.newPhoneNumber) && !this.countDown
+      Common.isValidateMobile(this.orgForm.newPhoneNumber) && !this.countDownOrg
     );
   }
 
@@ -80,7 +83,6 @@ export default class FindResetPasswordComp extends ComBaseComp {
   isPawAvailable(rule: any, password: any, callback: any) {
     const myreg = PATTERN_REG.password;
     if (!password) {
-      // 8-20位大小写字母和数字组合密码
       callback(new Error("请输入密码"));
     }
     if (!myreg.test(password)) {
@@ -133,13 +135,23 @@ export default class FindResetPasswordComp extends ComBaseComp {
    */
   async sendMsg(e: any) {
     try {
-      this.countDown = true;
-      this.perForm.sendType = 4;
-      const res = await this.systemService.getVerificationCode(this.perForm);
-      this.perForm.verifyCode = res;
-      this.timer = Common.resend(e.target, { num: 5 }, () => {
-        this.countDown = false;
-      });
+      if (this.resetType === "1") {
+        this.countDownPer = true;
+        this.perForm.sendType = 4;
+        const res = await this.systemService.getVerificationCode(this.perForm);
+        this.perForm.verifyCode = res;
+        this.timer = Common.resend(e.target, { num: 5 }, () => {
+          this.countDownPer = false;
+        });
+      } else {
+        this.countDownOrg = true;
+        this.orgForm.sendType = 5;
+        const res = await this.systemService.getVerificationCode(this.orgForm);
+        this.orgForm.verifyCode = res;
+        this.timer = Common.resend(e.target, { num: 5 }, () => {
+          this.countDownOrg = false;
+        });
+      }
     } catch (error) {
       this.messageError(error);
     }
@@ -147,7 +159,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
 
   async commit() {
     try {
-      if (this.type === "1") {
+      if (this.resetType === "1") {
         await (this.$refs.perForm as ElForm).validate();
         const res = await this.systemService.resetPersonalPassword(
           this.perForm,
@@ -159,6 +171,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
           this.orgForm,
         );
       }
+      this.$message.success("密码重置成功");
       this.dialogVisible = false;
     } catch (error) {
       this.messageError(error);
@@ -166,6 +179,8 @@ export default class FindResetPasswordComp extends ComBaseComp {
   }
 
   handleClose() {
+    (this.$refs.perForm as ElForm).resetFields();
+    (this.$refs.orgForm as ElForm).resetFields();
     this.$emit("showDialog", "findResetPswDialog", false);
   }
 

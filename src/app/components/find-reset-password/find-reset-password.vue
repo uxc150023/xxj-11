@@ -13,13 +13,13 @@
       <div
         style="margin: auto;margin-bottom: 30px;width: 512px;text-align:right;"
       >
-        <el-radio-group v-model="type">
+        <el-radio-group v-model="resetType">
           <el-radio-button label="1">个人登录</el-radio-button>
           <el-radio-button label="2">机构或社团等登录</el-radio-button>
         </el-radio-group>
       </div>
 
-      <el-tabs v-model="type" class="login-tabs">
+      <el-tabs v-model="resetType" class="login-tabs">
         <el-tab-pane label="" name="1">
           <el-form :model="perForm" ref="perForm" :rules="rules">
             <el-form-item label="" prop="phoneNumber">
@@ -103,7 +103,7 @@
                   <el-button
                     ref="msgBtn"
                     class="smsCode-button"
-                    :disabled="!allowSendMsgPer"
+                    :disabled="!allowSendMsgOrg"
                     @click="sendMsg($event)"
                     >获取验证码</el-button
                   >

@@ -1,4 +1,4 @@
-### III. 安装项目依赖包
+### I. 安装项目依赖包
 
 ```
 cd [project name] && npm i
@@ -10,7 +10,7 @@ cd [project name] && npm i
 npm i -g rimraf mkdirp ncp cross-env && npm i
 ```
 
-### IV. 启动开发环境开始开发
+### II. 启动开发环境开始开发
 
 ```
 npm run dev

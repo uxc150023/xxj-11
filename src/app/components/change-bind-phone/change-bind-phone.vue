@@ -2,7 +2,7 @@
   <div class="comp-module">
     <el-dialog
       title="个人更换绑定手机"
-      width="700px"
+      width="660px"
       :modal-append-to-body="false"
       :close-on-click-modal="false"
       :visible.sync="dialogVisible"
@@ -16,7 +16,6 @@
             type="tel"
             v-model="changeForm.phoneNumber"
             placeholder="请输入旧手机号"
-            size="large"
             style="width: 512px"
           ></el-input>
         </el-form-item>
@@ -27,13 +26,11 @@
               type="text"
               v-model="changeForm.verifyCode"
               placeholder="手机验证码"
-              size="large"
               style="width: 260px"
             ></el-input>
             <div class="sms-btn">
               <el-button
                 ref="msgBtn"
-                size="large"
                 class="smsCode-button"
                 :disabled="!allowSendMsgOld"
                 @click="sendMsg($event, 'old')"
@@ -48,7 +45,6 @@
             type="tel"
             v-model="changeForm.newPhoneNumber"
             placeholder="请输入新手机号"
-            size="large"
             style="width: 512px"
           ></el-input>
         </el-form-item>
@@ -59,13 +55,11 @@
               type="text"
               v-model="changeForm.newVerifyCode"
               placeholder="手机验证码"
-              size="large"
               style="width: 260px"
             ></el-input>
             <div class="sms-btn">
               <el-button
                 ref="msgBtn"
-                size="large"
                 class="smsCode-button"
                 :disabled="!allowSendMsgNew"
                 @click="sendMsg($event, 'new')"
@@ -74,12 +68,14 @@
             </div>
           </div>
         </el-form-item>
-      </el-form>
-      <div slot="footer">
-        <el-button type="primary" size="medium" @click="commit('changeForm')"
+        <el-button
+          type="primary"
+          @click="commit('changeForm')"
+          class="commit-btn"
           >确定</el-button
         >
-      </div>
+      </el-form>
+      <div slot="footer"></div>
     </el-dialog>
   </div>
 </template>
@@ -97,5 +93,16 @@ $color: #333;
       font-size: 22px;
     }
   }
+}
+.commit-btn {
+  width: 512px;
+  height: 52px;
+  margin: 0 auto;
+
+  font-size: 24px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 33px;
 }
 </style>
