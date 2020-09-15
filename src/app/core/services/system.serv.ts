@@ -9,11 +9,6 @@ export interface ISystemService {
    */
   loginDo(params: any): Promise<any>;
   /**
-   * 找回新学名
-   * @param params
-   */
-  backLearningName(params: any): Promise<any>;
-  /**
    * 单位更换联系手机
    * @param params
    */
@@ -29,7 +24,7 @@ export interface ISystemService {
    */
   commitRegisterOrg(params: any): Promise<any>;
   /**
-   * getVerificationCode
+   * 获取验证码
    * @param params
    */
   getVerificationCode(params: any): Promise<any>;
@@ -121,14 +116,6 @@ export class SystemService extends BaseService implements ISystemService {
       verifyType,
     });
   }
-  public backLearningName(params: any): Promise<any> {
-    const { phoneNumber, verifyCode } = params;
-    return this.proxyHttp.post("backLearningName", {
-      phoneNumber,
-      verifyCode,
-    });
-  }
-
   public changeOrgMobile(params: any): Promise<any> {
     const {
       phoneNumber,
@@ -149,7 +136,8 @@ export class SystemService extends BaseService implements ISystemService {
   public getVerificationCode(params: any): Promise<any> {
     const { phoneNumber, sendType } = params;
     return this.proxyHttp.post("getVerificationCode", {
-      phoneNumber,
+      phoneNumber:
+        params.sendType === "7" ? params.newPhoneNumber : params.phoneNumber,
       sendType,
     });
   }

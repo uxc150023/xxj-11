@@ -101,7 +101,7 @@ export default class LoginComp extends ComBaseComp {
   async sendMsg(e: any, isReplace: boolean = false) {
     try {
       this.countDown = true;
-      this.perLoginForm.sendType = 3;
+      this.perLoginForm.sendType = "3";
       const res = await this.systemService.getVerificationCode(
         this.perLoginForm,
       );
@@ -119,7 +119,7 @@ export default class LoginComp extends ComBaseComp {
       });
       // }
     } catch (error) {
-      //
+      this.messageError(error);
     }
   }
 

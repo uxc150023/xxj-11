@@ -14,8 +14,8 @@
         style="margin: auto;margin-bottom: 30px;width: 512px;text-align:right;"
       >
         <el-radio-group v-model="resetType">
-          <el-radio-button label="1">个人登录</el-radio-button>
-          <el-radio-button label="2">机构或社团等登录</el-radio-button>
+          <el-radio-button label="1">个人重置密码</el-radio-button>
+          <el-radio-button label="2">机构/社团等重置密码</el-radio-button>
         </el-radio-group>
       </div>
 
@@ -86,7 +86,7 @@
               <el-input
                 type="tel"
                 v-model="orgForm.phoneNumber"
-                placeholder="请输入个人手机号"
+                placeholder="联系手机号"
                 style="width: 512px"
               ></el-input>
             </el-form-item>

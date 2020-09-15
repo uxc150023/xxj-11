@@ -47,14 +47,6 @@ export default class FindResetPasswordComp extends ComBaseComp {
     verifyType: [
       { required: true, message: "请选择单位或社团类型", trigger: "change" },
     ],
-    agreement: [
-      {
-        message: "请先同意协议",
-        required: true,
-        trigger: "change",
-        type: "array",
-      },
-    ],
   };
 
   @Prop({
@@ -70,7 +62,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
 
   get allowSendMsgOrg() {
     return (
-      Common.isValidateMobile(this.orgForm.newPhoneNumber) && !this.countDownOrg
+      Common.isValidateMobile(this.orgForm.phoneNumber) && !this.countDownOrg
     );
   }
 
@@ -137,7 +129,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
     try {
       if (this.resetType === "1") {
         this.countDownPer = true;
-        this.perForm.sendType = 4;
+        this.perForm.sendType = "4";
         const res = await this.systemService.getVerificationCode(this.perForm);
         this.perForm.verifyCode = res;
         this.timer = Common.resend(e.target, { num: 5 }, () => {
@@ -145,7 +137,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
         });
       } else {
         this.countDownOrg = true;
-        this.orgForm.sendType = 5;
+        this.orgForm.sendType = "5";
         const res = await this.systemService.getVerificationCode(this.orgForm);
         this.orgForm.verifyCode = res;
         this.timer = Common.resend(e.target, { num: 5 }, () => {
@@ -153,10 +145,15 @@ export default class FindResetPasswordComp extends ComBaseComp {
         });
       }
     } catch (error) {
+      this.countDownPer = false;
+      this.countDownOrg = false;
       this.messageError(error);
     }
   }
 
+  /**
+   * 提交
+   */
   async commit() {
     try {
       if (this.resetType === "1") {
@@ -164,7 +161,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
         const res = await this.systemService.resetPersonalPassword(
           this.perForm,
         );
-        this.dialogVisible = false;
+        this.handleClose();
       } else {
         await (this.$refs.orgForm as ElForm).validate();
         const res = await this.systemService.resetPersonalPassword(
@@ -172,7 +169,7 @@ export default class FindResetPasswordComp extends ComBaseComp {
         );
       }
       this.$message.success("密码重置成功");
-      this.dialogVisible = false;
+      this.handleClose();
     } catch (error) {
       this.messageError(error);
     }

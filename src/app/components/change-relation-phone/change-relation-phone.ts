@@ -86,7 +86,7 @@ export default class ChangeRelationPhoneComp extends ComBaseComp {
     try {
       if (type === "old") {
         this.countDownOld = true;
-        this.changeForm.sendType = 1;
+        this.changeForm.sendType = "8";
         const res = await this.systemService.getVerificationCode(
           this.changeForm,
         );
@@ -96,7 +96,7 @@ export default class ChangeRelationPhoneComp extends ComBaseComp {
         });
       } else {
         this.countDownNew = true;
-        this.changeForm.sendType = 1;
+        this.changeForm.sendType = "9";
         const res = await this.systemService.getVerificationCode(
           this.changeForm,
         );

@@ -24,7 +24,7 @@ export default class FindLearningNameComp extends ComBaseComp {
   baseForm: BaseInfo = new BaseInfo();
   countDown: boolean = false;
   timer: any;
-
+  learnName: string = "";
   rules: any = {
     phoneNumber: [{ validator: this.validateMobile, trigger: "change" }],
     verifyCode: [
@@ -68,7 +68,7 @@ export default class FindLearningNameComp extends ComBaseComp {
     try {
       if (type === "old") {
         this.countDown = true;
-        this.baseForm.sendType = 1;
+        this.baseForm.sendType = "1";
         const res = await this.systemService.getVerificationCode(this.baseForm);
         this.baseForm.verifyCode = res;
         this.timer = Common.resend(e.target, { num: 5 }, () => {
@@ -76,7 +76,7 @@ export default class FindLearningNameComp extends ComBaseComp {
         });
       } else {
         this.countDown = true;
-        this.baseForm.sendType = 10;
+        this.baseForm.sendType = "10";
         const res = await this.systemService.getVerificationCode(this.baseForm);
         this.baseForm.newVerifyCode = res;
         this.timer = Common.resend(e.target, { num: 5 }, () => {
@@ -88,18 +88,24 @@ export default class FindLearningNameComp extends ComBaseComp {
     }
   }
 
+  /**
+   * 获取新学名
+   */
   async commit() {
     try {
       await (this.$refs.baseForm as ElForm).validate();
-      await this.systemService.backLearningName(this.baseForm);
+      const res = await this.systemService.retrievegLearningName(this.baseForm);
+      this.learnName = res;
     } catch (error) {
       this.messageError(error);
     }
   }
 
   handleClose() {
-    (this.$refs.baseForm as ElForm).resetFields();
-    (this.$refs.baseForm as ElForm).resetFields();
+    if (!this.learnName) {
+      (this.$refs.baseForm as ElForm).resetFields();
+      (this.$refs.baseForm as ElForm).resetFields();
+    }
     this.$emit("showDialog", "findLearningNameDialog", false);
   }
   /* 生命钩子 START */

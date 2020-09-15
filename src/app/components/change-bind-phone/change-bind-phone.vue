@@ -40,7 +40,7 @@
           </div>
         </el-form-item>
 
-        <el-form-item label="" prop="phoneNumber">
+        <el-form-item label="" prop="newPhoneNumber">
           <el-input
             type="tel"
             v-model="changeForm.newPhoneNumber"
