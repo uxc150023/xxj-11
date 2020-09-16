@@ -6,7 +6,7 @@
       :modal-append-to-body="false"
       :close-on-click-modal="false"
       :visible.sync="dialogVisible"
-      custom-class="common-dialog"
+      custom-class="common-dialog-login"
       :before-close="handleClose"
       center
     >
@@ -86,7 +86,7 @@ $color: #333;
   color: $color;
   font-size: 0.6rem;
 }
-.common-dialog {
+.common-dialog-login {
   .sms-btn {
     width: 253px;
     button {

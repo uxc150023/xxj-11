@@ -40,18 +40,17 @@ $color: #333;
         font-size: 30px;
         font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
-        line-height: 42px;
+        line-height: 38px;
         margin-right: 24px;
       }
     }
     .el-menu--horizontal > .el-menu-item {
       height: 40px;
-      line-height: 40px;
       font-size: 28px;
       font-family: PingFangSC-Regular, PingFang SC;
       font-weight: 400;
       color: #3b5369;
-      line-height: 40px;
+      line-height: 38px;
       border-radius: 4px;
     }
     .el-menu--horizontal > .el-menu-item.is-active {
@@ -59,7 +58,7 @@ $color: #333;
       font-family: PingFangSC-Medium, PingFang SC;
       font-weight: 500;
       color: #ffffff;
-      line-height: 42px;
+      line-height: 38px;
       border: none;
       background-color: #115ef9 !important;
     }

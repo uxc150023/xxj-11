@@ -13,7 +13,7 @@ import {
   components: {},
 })
 export default class NavMenuComp extends Vue {
-  activeMenu: string = "home";
+  activeMenu: string = "/home";
   @Prop({
     default: () => {
       return [];

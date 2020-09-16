@@ -3,24 +3,27 @@ import Component, { mixins } from "vue-class-component";
 import { AutowiredService } from "../../../lib/sg-resource/decorators";
 import BasePage from "../BasePage";
 
-interface IHomePage {}
+interface IHomePage {
+  /**
+   * 激活tab
+   */
+  activeName: string;
+}
 
 @Component({
   components: {},
   name: "home",
 })
 export default class HomePage extends mixins(BasePage) implements IHomePage {
-  title: string = "首页";
   activeName: string = "1";
-  fetchData() {
-    //
-  }
-
+  /**
+   * 切换tab
+   */
   handleClick() {
-    //
+    this.$router.push({ params: { tab: this.activeName } });
   }
   /* 生命钩子 START */
   mounted() {
-    //
+    this.activeName = this.$route.params.tab ? this.$route.params.tab : "1";
   }
 }

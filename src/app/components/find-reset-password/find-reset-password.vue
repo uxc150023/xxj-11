@@ -6,7 +6,7 @@
       :modal-append-to-body="false"
       :close-on-click-modal="false"
       :visible.sync="dialogVisible"
-      custom-class="common-dialog"
+      custom-class="common-dialog-login"
       :before-close="handleClose"
       center
     >
@@ -35,6 +35,7 @@
               <div class="flex">
                 <el-input
                   type="text"
+                  class="border-right-none"
                   v-model="perForm.verifyCode"
                   placeholder="手机验证码"
                   style="width: 260px"

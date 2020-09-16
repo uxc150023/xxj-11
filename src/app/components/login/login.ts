@@ -13,6 +13,7 @@ import Common from "../../core/common";
 import { PATTERN_REG } from "../../core/constants";
 import { BaseInfo } from "../../core/domain/BaseInfo";
 import { SystemService } from "../../core/services/system.serv";
+import { SET_ACCOUNT_INFO } from "../../core/store/mutationTypes";
 
 @Component({
   components: {},
@@ -130,17 +131,19 @@ export default class LoginComp extends ComBaseComp {
   async submitForm() {
     // this.reload(); // 刷新页面
     try {
+      let res;
       if (this.loginType === "1") {
         this.perLoginForm.personalOrOrg = this.loginType;
         this.perLoginForm.autoLogin = this.autoLogin ? "1" : "0";
         await (this.$refs.perLoginForm as ElForm).validate();
-        const res = await this.systemService.loginDo(this.perLoginForm);
+        res = await this.systemService.loginDo(this.perLoginForm);
       } else {
         this.orgLoginForm.personalOrOrg = this.loginType;
         this.orgLoginForm.autoLogin = this.autoLogin ? "1" : "0";
         await (this.$refs.orgLoginForm as ElForm).validate();
-        const res = await this.systemService.loginDo(this.orgLoginForm);
+        res = await this.systemService.loginDo(this.orgLoginForm);
       }
+      this.$store.commit(SET_ACCOUNT_INFO, res);
       this.$message.success("登录成功");
       this.setShowLoginRegister();
       this.reload();

@@ -197,8 +197,23 @@ ul {
   -webkit-border-radius: 6px;
 }
 
+// ---------------------------------------------公共样式-----------------------------------------------
+#nprogress .bar {
+  background: red !important; //自定义颜色
+}
+
 .flex {
   display: flex;
+}
+
+.border-right-none {
+  border-right: none;
+  border-bottom-right-radius: 0;
+  input {
+    border-right: none;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+  }
 }
 
 // 验证码

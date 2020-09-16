@@ -21,7 +21,7 @@ const routes: RouteConfig[] = [
     },
     children: [
       {
-        path: "/home",
+        path: "/home/:tab?",
         name: "home",
         component: PageFactory.homePagePreloading,
         meta: {
