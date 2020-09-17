@@ -8,6 +8,7 @@ export const apiConfig: IApiConfig = {
   post: {
     // SGV-BUILD-API-POST # NOT DELETE
     login: "",
+    // ------------------------------------------登录注册------------------------------------------
     // 登录
     loginDo: "apiHost:/xxj/create/login/login",
     // 单位更换联系手机
@@ -30,6 +31,11 @@ export const apiConfig: IApiConfig = {
     getVerificationCode: "apiHost:/xxj/create/register/getVerificationCode",
     // 找回新学名
     retrievegLearningName: "apiHost:/xxj/create/manage/retrievegLearningName",
+    // --------------------------------------------建站---------------------------------------------
+    // 获取首页图片
+    getFirstPageUrl: "apiHost:/xxj/create/firstPage/getFirstPageUrl",
+    // 首页上传图片
+    uploadFirstPagePic: "apiHost:/xxj/create/firstPage/uploadFirstPagePic",
   },
   get: {
     // SGV-BUILD-API-GET # NOT DELETE

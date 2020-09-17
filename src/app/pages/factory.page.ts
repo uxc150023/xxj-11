@@ -1,4 +1,11 @@
 // SGV-BUILD-PAGE-FAC # NOT DELETE
+// 'Website' PAGE FACTORY START
+export function websitePagePreloading(): Promise<any> {
+  return import("./website/website.vue").catch(error => {
+    return dealOccurred(error, "Website");
+  });
+}
+// 'Website' PAGE FACTORY END
 // 'Presentbook' PAGE FACTORY START
 export function presentbookPagePreloading(): Promise<any> {
   return import("./presentbook/presentbook.vue").catch(error => {

@@ -129,7 +129,6 @@ export default class LoginComp extends ComBaseComp {
    * @param type 登录类型
    */
   async submitForm() {
-    // this.reload(); // 刷新页面
     try {
       let res;
       if (this.loginType === "1") {
