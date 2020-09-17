@@ -8,8 +8,6 @@
         </el-aside>
         <el-container>
           <el-main>
-            <nav-menu :tabs="tabs"></nav-menu>
-            <div class="page-bg"></div>
             <router-view />
           </el-main>
           <el-footer>Footer</el-footer>
@@ -21,11 +19,6 @@
 <script lang="ts" src="./index.ts"></script>
 <style lang="scss" scoped>
 .page-module {
-  .page-bg {
-    width: 100%;
-    height: 186px;
-    // background: red;
-  }
   .el-header,
   .el-footer {
     background-color: #b3c0d1;

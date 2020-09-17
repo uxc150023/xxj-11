@@ -1,6 +1,6 @@
 <template>
   <div class="comp-module">
-    {{ title }}
+    <div class="create-website"></div>
   </div>
 </template>
 <script lang="ts" src="./visit-card.ts"></script>
@@ -9,6 +9,9 @@ $color: #333;
 
 .comp-module {
   color: $color;
-  font-size: 0.6rem;
+  .create-website {
+    height: 230px;
+    background: mediumaquamarine;
+  }
 }
 </style>

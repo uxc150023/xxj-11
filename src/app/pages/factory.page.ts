@@ -1,35 +1,35 @@
 // SGV-BUILD-PAGE-FAC # NOT DELETE
 // 'Website' PAGE FACTORY START
 export function websitePagePreloading(): Promise<any> {
-  return import("./website/website.vue").catch(error => {
+  return import("./website/website.vue").catch((error) => {
     return dealOccurred(error, "Website");
   });
 }
 // 'Website' PAGE FACTORY END
 // 'Presentbook' PAGE FACTORY START
 export function presentbookPagePreloading(): Promise<any> {
-  return import("./presentbook/presentbook.vue").catch(error => {
+  return import("./presentbook/presentbook.vue").catch((error) => {
     return dealOccurred(error, "Presentbook");
   });
 }
 // 'Presentbook' PAGE FACTORY END
 // 'Contribute' PAGE FACTORY START
 export function contributePagePreloading(): Promise<any> {
-  return import("./contribute/contribute.vue").catch(error => {
+  return import("./contribute/contribute.vue").catch((error) => {
     return dealOccurred(error, "Contribute");
   });
 }
 // 'Contribute' PAGE FACTORY END
 // 'Competition' PAGE FACTORY START
 export function competitionPagePreloading(): Promise<any> {
-  return import("./competition/competition.vue").catch(error => {
+  return import("./competition/competition.vue").catch((error) => {
     return dealOccurred(error, "Competition");
   });
 }
 // 'Competition' PAGE FACTORY END
 // 'Masterwork' PAGE FACTORY START
 export function masterworkPagePreloading(): Promise<any> {
-  return import("./masterwork/masterwork.vue").catch(error => {
+  return import("./masterwork/masterwork.vue").catch((error) => {
     return dealOccurred(error, "Masterwork");
   });
 }
@@ -101,6 +101,13 @@ export function indexPagePreloading(): Promise<any> {
 export function homePagePreloading(): Promise<any> {
   return import("./home/home.vue").catch((error) => {
     return dealOccurred(error, "Home");
+  });
+}
+// 'Website' PAGE FACTORY END
+// 'Home' PAGE FACTORY START
+export function homeWebsitePagePreloading(): Promise<any> {
+  return import("./website/home/home.vue").catch((error) => {
+    return dealOccurred(error, "HomeWebsite");
   });
 }
 // 'Home' PAGE FACTORY END

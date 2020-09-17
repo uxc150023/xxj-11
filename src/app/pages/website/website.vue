@@ -1,6 +1,8 @@
 <template>
   <div class="page-module">
-    {{ title }}
+    <nav-menu :tabs="tabs"></nav-menu>
+    <visit-card />
+    <router-view />
   </div>
 </template>
 <script lang="ts" src="./website.ts"></script>
