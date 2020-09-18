@@ -1,9 +1,26 @@
-import Vue from "vue";
+import { ElForm } from "element-ui/types/form";
 import Component, { mixins } from "vue-class-component";
+import { WebsiteService } from "../../../app/core/services/website.serv";
 import { AutowiredService } from "../../../lib/sg-resource/decorators";
 import BasePage from "../BasePage";
 
 interface IWebsitePage {
+  /**
+   * 当前激活tab
+   */
+  activeName: string;
+  /**
+   * 首页Url List
+   */
+  firstPageList: any[];
+  /**
+   * 接口请求中
+   */
+  loading: boolean;
+  /**
+   * 离学网只差5分钟
+   */
+  createForm: any;
   /**
    * 获取页面展示所需的远程数据
    */
@@ -16,25 +33,70 @@ interface IWebsitePage {
 })
 export default class WebsitePage extends mixins(BasePage)
   implements IWebsitePage {
-  title: string = "Website";
-  tabs: any[] = [
-    { label: "首页", index: "/home" },
-    { label: "写录", index: "/write" },
-    { label: "名著", index: "/masterwork" },
-    { label: "课程", index: "/course" },
-    { label: "讲座", index: "/chair" },
-    { label: "会议", index: "/meeting" },
-    { label: "送书", index: "/presentbook" },
-    { label: "投稿", index: "/contribute" },
-    { label: "竞赛", index: "/competition" },
-    // { label: "联盟", index: "/alliance" },
-    // { label: "角色", index: "/personage" },
-  ];
+  @AutowiredService
+  websiteService: WebsiteService;
+  firstPageList: any[] = [];
+  activeName: string = "";
+  loading: boolean = false;
+  createForm: any = {
+    phoneNumber: "",
+  };
   fetchData() {
     //
   }
-  /* 生命钩子 START */
-  mounted() {
-    //
+
+  /**
+   * 切换tab
+   * @param activeName
+   * @param oldActiveName
+   */
+  beforeLeave(activeName: string) {
+    if (this.loading) {
+      this.$message.warning("数据获取中，请稍后再试");
+      return false;
+    }
+    this.$router.push({ params: { step: activeName } });
+    switch (activeName) {
+      case "1":
+        this.getFirstPageUrl();
+        break;
+      case "2":
+        break;
+      case "3":
+        break;
+      case "4":
+        break;
+      case "5":
+        break;
+      case "6":
+        break;
+      case "7":
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /**
+   * 获取首页图片
+   */
+  async getFirstPageUrl() {
+    try {
+      this.loading = true;
+      const res = await this.websiteService.getFirstPageUrl({});
+      this.firstPageList = res;
+      this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.messageError(error);
+    }
+  }
+
+  created() {
+    if (this.$route.params.step) {
+      this.activeName = this.$route.params.step;
+      this.beforeLeave(this.activeName);
+    }
   }
 }

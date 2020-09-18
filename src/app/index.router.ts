@@ -23,22 +23,12 @@ const routes: RouteConfig[] = [
     children: [
       // 建站
       {
-        path: "/website",
+        path: "/website/:step?",
         name: "website",
         component: PageFactory.websitePagePreloading,
         meta: {
           jurisdiction: true,
         },
-        children: [
-          {
-            path: "/home/:tab?",
-            name: "homeWebsite",
-            component: PageFactory.homeWebsitePagePreloading,
-            meta: {
-              jurisdiction: true,
-            },
-          },
-        ],
       },
       {
         path: "/home/:tab?",

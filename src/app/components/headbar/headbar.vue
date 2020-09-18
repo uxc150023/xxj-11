@@ -3,9 +3,22 @@
     <div class="comp-module-page">
       <div class="comp-left">
         <img src="../../styles/images/logo.png" alt="cchrpp logo" />
-        <p>建站</p>
-        <p>理事</p>
-        <p>学群</p>
+        <el-menu
+          :default-active="activeMenu"
+          router
+          mode="horizontal"
+          background-color="transparent"
+          text-color="#fff"
+          style="min-width: 1300px"
+        >
+          <el-menu-item
+            v-for="(item, index) in tabs"
+            :key="index"
+            :index="item.index"
+          >
+            {{ item.label }}
+          </el-menu-item>
+        </el-menu>
       </div>
       <div class="account-box">
         <div class="btn">
@@ -80,13 +93,15 @@ $color: #333;
       height: 28px;
       margin-right: 8px;
     }
-    p {
-      font-size: 18px;
-      font-family: PingFang SC;
-      font-weight: 400;
-      color: #ffffff;
-      margin-right: 30px;
-      cursor: pointer;
+    /deep/ {
+      .el-menu-item {
+        font-size: 22px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 46px;
+        height: 46px;
+      }
     }
   }
   h1 {

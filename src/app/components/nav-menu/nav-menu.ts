@@ -13,7 +13,7 @@ import {
   components: {},
 })
 export default class NavMenuComp extends Vue {
-  activeMenu: string = "/home";
+  activeMenu: string = "";
   @Prop({
     default: () => {
       return [];
@@ -27,18 +27,17 @@ export default class NavMenuComp extends Vue {
     if (m != null) {
       this.activeMenu = this.$route.path || valueNew;
     } else {
-      this.activeMenu = "/home";
+      this.activeMenu = "/";
     }
   }
 
-  /* 生命钩子 START */
   mounted() {
     const path = this.$route.path;
     const m = path.match(/^\/\w+/);
     if (m != null) {
       this.activeMenu = this.$route.path || path;
     } else {
-      this.activeMenu = "/home";
+      this.activeMenu = "/";
     }
   }
 }

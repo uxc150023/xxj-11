@@ -103,13 +103,6 @@ export function homePagePreloading(): Promise<any> {
     return dealOccurred(error, "Home");
   });
 }
-// 'Website' PAGE FACTORY END
-// 'Home' PAGE FACTORY START
-export function homeWebsitePagePreloading(): Promise<any> {
-  return import("./website/home/home.vue").catch((error) => {
-    return dealOccurred(error, "HomeWebsite");
-  });
-}
 // 'Home' PAGE FACTORY END
 // 'Login' PAGE FACTORY START
 export function loginPagePreloading(): Promise<any> {

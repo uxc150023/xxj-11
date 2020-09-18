@@ -2,6 +2,7 @@
 import Vue from "vue";
 
 // SGV-BUILD-COMP-FAC # NOT DELETE
+Vue.component("xxj-editor", require("./xxj-editor/xxj-editor.vue").default);
 Vue.component("visit-card", require("./visit-card/visit-card.vue").default);
 Vue.component("change-relation-phone", require("./change-relation-phone/change-relation-phone.vue").default);
 Vue.component("find-learning-name", require("./find-learning-name/find-learning-name.vue").default);

@@ -8,6 +8,7 @@
         </el-aside>
         <el-container>
           <el-main>
+            <nav-menu :tabs="tabs"></nav-menu>
             <router-view />
           </el-main>
           <el-footer>Footer</el-footer>

@@ -1,0 +1,20 @@
+<template>
+  <div class="comp-module">
+    <div id="wangeditor" class="">
+      <div
+        class="wangeditor-box"
+        ref="editorElem"
+        style="text-align:left;min-height: 500px;"
+      ></div>
+    </div>
+  </div>
+</template>
+<script lang="ts" src="./xxj-editor.ts"></script>
+<style lang="scss" scoped>
+$color: #333;
+
+.comp-module {
+  color: $color;
+  font-size: 0.6rem;
+}
+</style>
