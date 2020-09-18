@@ -35,6 +35,7 @@
                     v-model="perRegForm.verifyCode"
                     placeholder="手机验证码"
                     style="width: 260px;flex: 1;"
+                    class="border-right-none"
                   ></el-input>
                   <el-button
                     ref="msgBtn"
@@ -110,6 +111,7 @@
                     v-model="orgRegForm.verifyCode"
                     placeholder="手机验证码"
                     style="width: 260px"
+                    class="border-right-none"
                   ></el-input>
                   <el-button
                     ref="msgBtn"

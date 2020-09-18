@@ -27,6 +27,7 @@
               v-model="changeForm.verifyCode"
               placeholder="手机验证码"
               style="width: 260px"
+              class="border-right-none"
             ></el-input>
             <div class="sms-btn">
               <el-button
@@ -56,6 +57,7 @@
               v-model="changeForm.newVerifyCode"
               placeholder="手机验证码"
               style="width: 260px"
+              class="border-right-none"
             ></el-input>
             <div class="sms-btn">
               <el-button

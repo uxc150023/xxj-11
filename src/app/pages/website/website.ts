@@ -22,6 +22,14 @@ interface IWebsitePage {
    */
   createForm: any;
   /**
+   * 学网类型
+   */
+  webmoldOptions: any[];
+  /**
+   * 学网型号
+   */
+  webmtypeOptions: any[];
+  /**
    * 获取页面展示所需的远程数据
    */
   fetchData(): void;
@@ -39,8 +47,21 @@ export default class WebsitePage extends mixins(BasePage)
   activeName: string = "";
   loading: boolean = false;
   createForm: any = {
-    phoneNumber: "",
+    mold: "", // 类型
+    type: "", // 型号
+    name: "", // 新网名
+    address: "", // 新网址
   };
+  webmoldOptions: any[] = [
+    { label: "xx", value: 1 },
+    { label: "yy", value: 2 },
+    { label: "zz", value: 3 },
+  ];
+  webmtypeOptions: any[] = [
+    { label: "xx", value: 1 },
+    { label: "yy", value: 2 },
+    { label: "zz", value: 3 },
+  ];
   fetchData() {
     //
   }
@@ -94,9 +115,7 @@ export default class WebsitePage extends mixins(BasePage)
   }
 
   created() {
-    if (this.$route.params.step) {
-      this.activeName = this.$route.params.step;
-      this.beforeLeave(this.activeName);
-    }
+    this.activeName = this.$route.params.step ? this.$route.params.step : "1";
+    this.beforeLeave(this.activeName);
   }
 }

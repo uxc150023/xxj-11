@@ -9,7 +9,7 @@
           mode="horizontal"
           background-color="transparent"
           text-color="#fff"
-          style="min-width: 1300px"
+          style="min-width: 1000px"
         >
           <el-menu-item
             v-for="(item, index) in tabs"

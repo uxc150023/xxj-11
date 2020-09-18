@@ -4,7 +4,7 @@
       <div
         class="wangeditor-box"
         ref="editorElem"
-        style="text-align:left;min-height: 500px;"
+        style="text-align:left;min-height: 200px;"
       ></div>
     </div>
   </div>

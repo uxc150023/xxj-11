@@ -30,6 +30,7 @@
                   v-model="perLoginForm.phoneNumber"
                   placeholder="请输入注册手机/新学名"
                   style="width: 512px"
+                  class="border-right-none"
                 ></el-input>
               </el-form-item>
               <transition
@@ -43,6 +44,7 @@
                       v-model="ruleSmsCode"
                       style="flex: 1"
                       placeholder="请输入验证码"
+                      class="border-right-none"
                     ></el-input>
                     <div
                       style="width: 91px;height: 46px"
@@ -61,6 +63,7 @@
                     v-model="perLoginForm.verifyCode"
                     placeholder="手机验证码"
                     style="width: 260px"
+                    class="border-right-none"
                   ></el-input>
                   <div class="sms-btn">
                     <el-button

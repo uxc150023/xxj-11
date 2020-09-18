@@ -11,7 +11,7 @@
             <nav-menu :tabs="tabs"></nav-menu>
             <router-view />
           </el-main>
-          <el-footer>Footer</el-footer>
+          <el-footer>新学界（上海）文教科技有限公司</el-footer>
         </el-container>
       </el-container>
     </el-container>

@@ -99,6 +99,7 @@
                   v-model="orgForm.verifyCode"
                   placeholder="手机验证码"
                   style="width: 260px"
+                  class="border-right-none"
                 ></el-input>
                 <div class="sms-btn">
                   <el-button
