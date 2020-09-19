@@ -11,7 +11,7 @@
       <el-menu-item
         v-for="(item, index) in tabs"
         :key="index"
-        :index="item.index"
+        :index="item.value"
       >
         {{ item.label }}
       </el-menu-item>
