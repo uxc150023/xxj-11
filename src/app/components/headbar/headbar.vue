@@ -9,7 +9,6 @@
           mode="horizontal"
           background-color="transparent"
           text-color="#fff"
-          style="min-width: 1000px"
         >
           <el-menu-item
             v-for="(item, index) in tabs"
@@ -83,7 +82,7 @@ $color: #333;
   display: flex;
   justify-content: space-between;
   z-index: 9;
-  width: calc(100% - 300px);
+  width: calc(75%);
   right: 0;
   .comp-left {
     display: flex;

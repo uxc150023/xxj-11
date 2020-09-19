@@ -3,7 +3,7 @@
     <headbar></headbar>
     <el-container>
       <el-container>
-        <el-aside style="width: 300px;">
+        <el-aside>
           <rightview></rightview>
         </el-aside>
         <el-container>
@@ -36,6 +36,7 @@
     line-height: 200px;
     height: calc(100vh);
     position: fixed;
+    width: calc(25%) !important;
   }
 
   .el-main {
@@ -45,8 +46,8 @@
     overflow: hidden;
     overflow-y: auto;
     padding: 46px 6px 6px 6px;
-    width: calc(100% - 300px);
-    margin-left: 300px;
+    width: calc(75%);
+    margin-left: calc(25%);
     background-color: #fff;
   }
 

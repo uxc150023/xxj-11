@@ -30,6 +30,18 @@ interface IWebsitePage {
    */
   webmtypeOptions: any[];
   /**
+   * 学网类型和价格
+   */
+  typeAndPriceTable: any[];
+  /**
+   * 新学名更新form
+   */
+  changeForm: any;
+  /**
+   * 学网升级form
+   */
+  upgradeForm: any;
+  /**
    * 获取页面展示所需的远程数据
    */
   fetchData(): void;
@@ -62,6 +74,37 @@ export default class WebsitePage extends mixins(BasePage)
     { label: "yy", value: 2 },
     { label: "zz", value: 3 },
   ];
+  typeAndPriceTable: any[] = [
+    {
+      date: "2016-05-02",
+      name: "王小虎",
+      address: "上海市普陀区金沙江路 1518 弄",
+    },
+  ];
+  changeForm: any = {
+    address: "",
+    name1: "",
+    name2: "",
+  };
+  upgradeForm: any = {
+    address: "",
+    name1: "",
+    name2: "",
+  };
+  rules: any = {
+    // learningName: [
+    //   { required: true, message: "请输入新学名", trigger: "change" },
+    // ],
+    // password: [{ validator: this.isPawAvailable, trigger: "change" }],
+    // // phoneNumber: [{ validator: this.validateMobile, trigger: "change" }],
+    // phoneNumber: [
+    //   { required: true, message: "请输入注册手机/新学名", trigger: "change" },
+    // ],
+    // verifyCode: [
+    //   { required: true, message: "请输入验证码", trigger: "change" },
+    // ],
+  };
+
   fetchData() {
     //
   }
