@@ -1,3 +1,4 @@
+import { Form } from "element-ui";
 import { ElForm } from "element-ui/types/form";
 import Vue from "vue";
 import Component, { mixins } from "vue-class-component";
@@ -5,6 +6,7 @@ import { AutowiredService } from "../../../lib/sg-resource/decorators";
 import { ComBaseComp } from "../../core/ComBaseComp";
 import Common from "../../core/common";
 import { SystemService } from "../../core/services/system.serv";
+import CommonStorage from "../../core/storage.conf";
 import { SET_ACCOUNT_INFO } from "../../core/store/mutationTypes";
 
 interface ILoginPage {}
@@ -41,12 +43,13 @@ export default class LoginPage extends mixins(ComBaseComp)
     const valid = await this.loginForm.validate();
     try {
       if (valid) {
-        const data = await this.systemService.login(
-          this.form.userName,
-          this.form.password,
-        );
-        this.$store.commit(SET_ACCOUNT_INFO, data);
-        this.$router.replace("/");
+        CommonStorage.setStorageInfo(CommonStorage.LOGIN_FORM, this.form);
+        // const data = await this.systemService.login(
+        //   this.form.userName,
+        //   this.form.password,
+        // );
+        // this.$store.commit(SET_ACCOUNT_INFO, data);
+        // this.$router.replace("/");
       }
     } catch (error) {
       this.messageError(error);
@@ -71,7 +74,9 @@ export default class LoginPage extends mixins(ComBaseComp)
   }
   mounted() {
     //
-    console.log(this.$sg);
+    if (CommonStorage.getStorageInfo(CommonStorage.LOGIN_FORM)) {
+      this.form = CommonStorage.getStorageInfo(CommonStorage.LOGIN_FORM);
+    }
   }
   destroyed() {
     Common.removeClass(document.querySelector("html"), "login-page");

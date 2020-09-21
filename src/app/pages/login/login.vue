@@ -1,12 +1,19 @@
 <template>
   <div class="page-module">
-    <el-form ref="loginForm" class="login-form" :rules="rules" :model="form">
+    <!-- <el-form ref="loginForm" class="login-form" :rules="rules" :model="form">
       <h3>欢迎登录</h3>
       <el-form-item prop="userName">
-        <el-input v-model="form.userName" placeholder="请输入您的用户名/手机/邮箱"></el-input>
+        <el-input
+          v-model="form.userName"
+          placeholder="请输入您的用户名/手机/邮箱"
+        ></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input type="password" v-model="form.password" placeholder="请输入您的密码"></el-input>
+        <el-input
+          type="password"
+          v-model="form.password"
+          placeholder="请输入您的密码"
+        ></el-input>
       </el-form-item>
       <el-form-item class="long-form-item">
         <el-button type="primary" @click="submitForm()">登录</el-button>
@@ -19,7 +26,9 @@
           <a href="javascript:" @click="signup">注册新账号</a>
         </li>
       </ul>
-    </el-form>
+    </el-form> -->
+    <xxj-editor />
+
     <el-dialog title="请选择您的身份类型" :visible.sync="dialogSignupVisible">
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="confirmRole">确定</el-button>
@@ -27,8 +36,7 @@
     </el-dialog>
   </div>
 </template>
-<script lang="ts" src="./login.ts">
-</script>
+<script lang="ts" src="./login.ts"></script>
 <style lang="scss" scoped>
 $color: #333;
 

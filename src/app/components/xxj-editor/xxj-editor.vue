@@ -1,12 +1,10 @@
 <template>
   <div class="comp-module">
-    <div id="wangeditor" class="">
-      <div
-        class="wangeditor-box"
-        ref="editorElem"
-        style="text-align:left;min-height: 200px;"
-      ></div>
-    </div>
+    <div
+      class="wangeditor-box"
+      ref="editorElem"
+      style="text-align:left;min-height: 200px;"
+    ></div>
   </div>
 </template>
 <script lang="ts" src="./xxj-editor.ts"></script>
