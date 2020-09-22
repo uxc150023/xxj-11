@@ -9,7 +9,13 @@
             :key="index"
             class="model-item"
           >
-            <div class="model-item-div"></div>
+            <div
+              class="model-item-div"
+              :style="{ backgroundImage: 'url(' + item.url + ')' }"
+            >
+              <p>{{ item.picTitle }}</p>
+              <!-- <img  class="item-bg" /> -->
+            </div>
             <p class="model-item-p">新一代智能互联网 个人主站</p>
           </div>
         </div>
@@ -246,6 +252,9 @@
       border: 3px solid #e8e8e8;
       width: 100%;
       height: 310px;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
     }
     .model-item-p {
       font-size: 36px;
