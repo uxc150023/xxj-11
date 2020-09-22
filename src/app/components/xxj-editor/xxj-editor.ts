@@ -9,20 +9,34 @@ import {
   Watch,
 } from "vue-property-decorator";
 import Editor from "wangeditor";
+import { Face } from "../../../lib/sg-resource/editor";
+import { ComBaseComp } from "../../core/ComBaseComp";
 
 @Component({
   components: {},
 })
-export default class XxjEditorComp extends Vue {
+export default class XxjEditorComp extends ComBaseComp {
   editor: any = {};
   editorContent: string = "";
   /* 生命钩子 START */
   mounted() {
-    this.editor = new Editor(this.$refs.wangeditor);
+    this.editor = new Editor(this.$refs.editor);
     this.editor.customConfig.onchange = (html: any) => {
       this.editorContent = html;
-      // this.catchData(this.editorContent); // 把这个html通过catchData的方法传入父组件
+      // this.$emit("contentChange", html); // 同步到父组件中
     };
+    this.editor.customConfig.colors = [
+      "#000000",
+      "#eeece0",
+      "#1c487f",
+      "#4d80bf",
+      "#c24f4a",
+      "#8baa4a",
+      "#7b5ba1",
+      "#46acc8",
+      "#f9963b",
+      "#ffffff",
+    ];
     this.editor.customConfig.menus = [
       // 菜单配置
       "head", // 标题
@@ -46,26 +60,14 @@ export default class XxjEditorComp extends Vue {
       "undo", // 撤销
       "redo", // 重复
     ];
-    // 表情面板可以有多个 tab ，因此要配置成一个数组。数组每个元素代表一个 tab 的配置
     this.editor.customConfig.emotions = [
       {
         // tab 的标题
-        title: "默认",
+        title: "新浪",
         // type -> 'emoji' / 'image'
         type: "image",
         // content -> 数组
-        content: [
-          {
-            alt: "[坏笑]",
-            src:
-              "http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/50/pcmoren_huaixiao_org.png",
-          },
-          {
-            alt: "[舔屏]",
-            src:
-              "http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/40/pcmoren_tian_org.png",
-          },
-        ],
+        content: Face.xinlang,
       },
       {
         // tab 的标题
@@ -73,11 +75,20 @@ export default class XxjEditorComp extends Vue {
         // type -> 'emoji' / 'image'
         type: "emoji",
         // content -> 数组
-        content: ["😀", "😃", "😄", "😁", "😆"],
+        content: Face.emoji,
       },
     ];
     this.editor.customConfig.pasteFilterStyle = false; // 关闭粘贴样式的过滤
-    // this.editor.customConfig.uploadImgShowBase64 = true; // 使用 base64 保存图片
+    this.editor.customConfig.customUploadImg = async (
+      files: any,
+      insert: any,
+    ) => {
+      const file = await this.uploadFile(files[0]);
+      // files 是 input 中选中的文件列表
+      // insert 是获取图片 url 后，插入到编辑器的方法
+      // 上传代码返回结果之后，将图片插入到编辑器中
+      insert(file!.url);
+    };
     this.editor.create(); // 创建富文本实例
   }
 }

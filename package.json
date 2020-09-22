@@ -34,6 +34,7 @@
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
+    "@types/ali-oss": "^6.0.5",
     "@types/axios-mock-adapter": "^1.10.0",
     "@types/crypto-js": "^3.1.47",
     "@types/node": "^12.6.9",
@@ -41,6 +42,7 @@
     "@types/qs": "^6.5.1",
     "@types/reflect-metadata": "^0.1.0",
     "@types/webpack-env": "^1.14.0",
+    "ali-oss": "^6.10.0",
     "awesome-typescript-loader": "^5.2.0",
     "cross-env": "^5.2.0",
     "crypto-js": "^4.0.0",

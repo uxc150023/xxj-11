@@ -1,3 +1,4 @@
+import OSS from "ali-oss";
 import { Message } from "element-ui";
 import {
   Component,
@@ -44,6 +45,26 @@ export class ComBaseComp extends Vue {
       });
     } else {
       Message({ message: JSON.stringify(error), type: "error" });
+    }
+  }
+
+  /**
+   * 文件上传
+   * @param data File
+   */
+  async uploadFile(data: File) {
+    const client = new OSS({
+      accessKeyId: "LTAI4GEJtkz5yhXUVwRjggJp",
+      accessKeySecret: "6Wb89Wm8mfu6FtJVSwrmU9G9fM8CN5",
+      bucket: "cyytest",
+      region: "oss-cn-shanghai",
+    });
+    try {
+      // object-key可以自定义为文件名（例如file.txt）或目录（例如abc/test/file.txt）的形式，实现将文件上传至当前Bucket或Bucket下的指定目录。
+      const result = await client.put("abc/test/file.jpg", data);
+      return result;
+    } catch (error) {
+      this.messageError(error);
     }
   }
 }
