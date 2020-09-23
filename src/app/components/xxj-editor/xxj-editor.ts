@@ -18,12 +18,20 @@ import { ComBaseComp } from "../../core/ComBaseComp";
 export default class XxjEditorComp extends ComBaseComp {
   editor: any = {};
   editorContent: string = "";
+  /**
+   * 设置editor内容
+   */
+  setContent(html: string) {
+    this.editorContent = html;
+    this.editor.txt.html(this.editorContent);
+  }
+
   /* 生命钩子 START */
   mounted() {
     this.editor = new Editor(this.$refs.editor);
     this.editor.customConfig.onchange = (html: any) => {
       this.editorContent = html;
-      // this.$emit("contentChange", html); // 同步到父组件中
+      this.$emit("contentChange", html); // 同步到父组件中
     };
     this.editor.customConfig.colors = [
       "#000000",

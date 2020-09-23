@@ -31,11 +31,27 @@ export const apiConfig: IApiConfig = {
     getVerificationCode: "apiHost:/xxj/create/register/getVerificationCode",
     // 找回新学名
     retrievegLearningName: "apiHost:/xxj/create/manage/retrievegLearningName",
-    // --------------------------------------------建站---------------------------------------------
+    // -----------------------------------------建站---------------------------------------------
     // 获取首页图片
     getFirstPageUrl: "apiHost:/xxj/create/firstPage/getFirstPageUrl",
     // 首页上传图片
     uploadFirstPagePic: "apiHost:/xxj/create/firstPage/uploadFirstPagePic",
+    // 只差5分钟 - 提交
+    submitMinute: "apiHost:/xxj/create/minute/submitMinute",
+    // 这款神器 - 查询
+    listArtifact: "apiHost:/xxj/create/artifact/listArtifact",
+    // 这款神器 - 保存
+    saveArtifact: "apiHost:/xxj/create/artifact/saveArtifact",
+    // 学网升级 - 获取新学名号
+    upgradeGetMH: "apiHost:/xxj/create/upgrade/getMH",
+    // 学网升级 - 修改新学名号
+    upgradeMH: "apiHost:/xxj/create/upgrade/upgradeMH",
+    // 学网类型与价格 - 显示价格
+    showPrice: "apiHost:/xxj/create/typeModelPrice/showPrice",
+    // 新学名号更新 - 获取新学名号
+    modifyGetMH: "apiHost:/xxj/create/modify/getMH",
+    // 新学名号更新 - 更新新学名号
+    modifySetMH: "apiHost:/xxj/create/modify/modify",
   },
   get: {
     // SGV-BUILD-API-GET # NOT DELETE

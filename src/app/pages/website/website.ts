@@ -38,6 +38,10 @@ interface IWebsitePage {
    */
   changeForm: any;
   /**
+   * 神器内容
+   */
+  bandContant: string;
+  /**
    * 学网升级form
    */
   upgradeForm: any;
@@ -58,6 +62,7 @@ export default class WebsitePage extends mixins(BasePage)
   firstPageList: any[] = [];
   activeName: string = "";
   loading: boolean = false;
+  bandContant: string = "";
   createForm: any = {
     mold: "", // 类型
     type: "", // 型号
@@ -125,6 +130,7 @@ export default class WebsitePage extends mixins(BasePage)
         this.getFirstPageUrl();
         break;
       case "2":
+        this.getListArtifact();
         break;
       case "3":
         break;
@@ -143,6 +149,31 @@ export default class WebsitePage extends mixins(BasePage)
   }
 
   /**
+   * click抢建新一代智能互联网
+   */
+  commit() {
+    switch (this.activeName) {
+      case "1":
+        break;
+      case "2":
+        this.commitSaveArtifact();
+        break;
+      case "3":
+        break;
+      case "4":
+        break;
+      case "5":
+        break;
+      case "6":
+        break;
+      case "7":
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
    * 获取首页图片
    */
   async getFirstPageUrl() {
@@ -155,6 +186,39 @@ export default class WebsitePage extends mixins(BasePage)
       this.loading = false;
       this.messageError(error);
     }
+  }
+
+  /**
+   * 这款神器 - 保存
+   */
+  async commitSaveArtifact() {
+    try {
+      await this.websiteService.saveArtifact(this.bandContant);
+      this.$message.success("保存成功");
+    } catch (error) {
+      this.messageError(error);
+    }
+  }
+
+  /**
+   * 这款神器 - 查询
+   */
+  async getListArtifact() {
+    try {
+      const res = await this.websiteService.listArtifact();
+      this.bandContant = res[0].bandContant;
+      (this.$refs.editor as any).setContent(this.bandContant);
+    } catch (error) {
+      this.messageError(error);
+    }
+  }
+
+  /**
+   * 获取编辑器内容
+   * @param html editor内容
+   */
+  contentChange(html: any) {
+    this.bandContant = html;
   }
 
   created() {

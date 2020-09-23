@@ -22,9 +22,12 @@
       </el-tab-pane>
       <el-tab-pane label="你还没有这款神器？" name="2">
         <div>
-          <xxj-editor />
+          <xxj-editor @contentChange="contentChange" ref="editor" />
           <div class="create-web">
-            <el-button type="primary" style="width: 546px;font-size: 36px"
+            <el-button
+              type="primary"
+              style="width: 546px;font-size: 36px"
+              @click="commit"
               >抢建新一代智能互联网</el-button
             >
             <p>网站+APP+公号+小程序</p>
@@ -231,7 +234,10 @@
         <div>
           <xxj-editor />
           <div class="create-web">
-            <el-button type="primary" style="width: 546px;font-size: 36px"
+            <el-button
+              type="primary"
+              style="width: 546px;font-size: 36px"
+              @click="commit"
               >抢建新一代智能互联网</el-button
             >
             <p>网站+APP+公号+小程序</p>
