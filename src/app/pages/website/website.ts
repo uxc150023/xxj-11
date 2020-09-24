@@ -64,10 +64,11 @@ export default class WebsitePage extends mixins(BasePage)
   loading: boolean = false;
   bandContant: string = "";
   createForm: any = {
-    mold: "", // 类型
-    type: "", // 型号
-    name: "", // 新网名
-    address: "", // 新网址
+    learningAddress: "", // 新网址
+    learningNet: "", // 新网名
+    model: "", // 型号
+    price: 0, // 价格
+    websiteType: "", // 类型
   };
   webmoldOptions: any[] = [
     { label: "xx", value: 1 },
@@ -79,13 +80,7 @@ export default class WebsitePage extends mixins(BasePage)
     { label: "yy", value: 2 },
     { label: "zz", value: 3 },
   ];
-  typeAndPriceTable: any[] = [
-    {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄",
-    },
-  ];
+  typeAndPriceTable: any[] = [];
   changeForm: any = {
     address: "",
     name1: "",
@@ -97,9 +92,12 @@ export default class WebsitePage extends mixins(BasePage)
     name2: "",
   };
   rules: any = {
-    // learningName: [
-    //   { required: true, message: "请输入新学名", trigger: "change" },
-    // ],
+    learningAddress: [
+      { required: true, message: "请输入新网址", trigger: "blur" },
+    ],
+    learningNet: [{ required: true, message: "请输入新网名", trigger: "blur" }],
+    model: [{ required: true, message: "选择学网型号", trigger: "blur" }],
+    websiteType: [{ required: true, message: "选择学网类型", trigger: "blur" }],
     // password: [{ validator: this.isPawAvailable, trigger: "change" }],
     // // phoneNumber: [{ validator: this.validateMobile, trigger: "change" }],
     // phoneNumber: [
@@ -135,6 +133,9 @@ export default class WebsitePage extends mixins(BasePage)
       case "3":
         break;
       case "4":
+        if (!this.typeAndPriceTable.length) {
+          this.getModelAndPrice();
+        }
         break;
       case "5":
         break;
@@ -208,6 +209,31 @@ export default class WebsitePage extends mixins(BasePage)
       const res = await this.websiteService.listArtifact();
       this.bandContant = res[0].bandContant;
       (this.$refs.editor as any).setContent(this.bandContant);
+    } catch (error) {
+      this.messageError(error);
+    }
+  }
+
+  /**
+   * 只差5分钟 - 提交
+   */
+  async submitMinute() {
+    try {
+      await (this.$refs.createForm as ElForm).validate();
+      await this.websiteService.submitMinute(this.createForm);
+      this.$message.success("成功提交");
+    } catch (error) {
+      this.messageError(error);
+    }
+  }
+
+  /**
+   * 获取学网价格和类型
+   */
+  async getModelAndPrice() {
+    try {
+      const res = await this.websiteService.showPrice();
+      this.typeAndPriceTable = res;
     } catch (error) {
       this.messageError(error);
     }

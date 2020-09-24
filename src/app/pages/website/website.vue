@@ -44,9 +44,9 @@
             label-position="left"
             label-width="80px"
           >
-            <el-form-item label="学网类型" prop="">
+            <el-form-item label="学网类型" prop="websiteType">
               <el-select
-                v-model="createForm.mold"
+                v-model="createForm.websiteType"
                 placeholder="请选择学网类型"
                 style="width: 422px"
               >
@@ -59,9 +59,9 @@
               </el-select>
             </el-form-item>
 
-            <el-form-item label="学网型号" prop="">
+            <el-form-item label="学网型号" prop="model">
               <el-select
-                v-model="createForm.type"
+                v-model="createForm.model"
                 placeholder="请选择学网型号"
                 style="width: 422px"
               >
@@ -72,30 +72,32 @@
                   :key="index"
                 ></el-option>
               </el-select>
-
-              <a class="type-a">学网类型与型号</a>
+              <a class="type-a">学网类型与价格</a>
             </el-form-item>
 
-            <el-form-item label="新网名" prop="">
+            <el-form-item label="新网名" prop="learningNet">
               <el-input
                 type="text"
-                v-model="createForm.name"
+                v-model="createForm.learningNet"
                 placeholder="请填写您喜欢的网名"
                 style="width: 644px"
               ></el-input>
             </el-form-item>
 
-            <el-form-item label="新网址" prop="">
+            <el-form-item label="新网址" prop="learningAddress">
               <el-input
                 type="text"
-                v-model="createForm.address"
+                v-model="createForm.learningAddress"
                 placeholder="请填写您中意的网址"
                 style="width: 644px"
               ></el-input>
             </el-form-item>
 
             <el-form-item label="学网定价">
-              <p class="web-price"><span>0</span>元</p>
+              <p class="web-price">
+                <span>{{ createForm.price }}</span
+                >元
+              </p>
             </el-form-item>
           </el-form>
           <el-button
@@ -108,6 +110,9 @@
       <el-tab-pane label="学网类型与价格" name="4">
         <el-table :data="typeAndPriceTable" border style="width: 100%">
           <el-table-column prop="date" label="类型编号" width="180">
+            <template slot-scope="scope">
+              {{ scope.$index + 1 }}
+            </template>
           </el-table-column>
           <el-table-column prop="name" label="学网类型" width="180">
           </el-table-column>
